@@ -5,9 +5,7 @@ const fs = require('fs');
 const multer = require('multer');
 const { createWorker } = require('tesseract.js');
 
-const worker = createWorker({
-    logger: m => console.log(m)
-});
+const worker = createWorker();
 
 
 // Declare all Storage
