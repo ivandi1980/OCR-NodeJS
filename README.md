@@ -23,3 +23,6 @@ to run the server you can run this command
 ```bash
 npm start
 ```
+
+## ScreenShoot
+![Dashboard](public/screenshoot.png "This is the dashboard")
