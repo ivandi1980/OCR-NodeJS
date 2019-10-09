@@ -7,7 +7,6 @@ const { createWorker } = require('tesseract.js');
 
 const worker = createWorker();
 
-
 // Declare all Storage
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -36,7 +35,8 @@ app.post('/upload', (req, res) => {
             worker
                 .recognize(data, 'eng', { testjs_create_pdf: '1' })
                 .progress(progress => console.log(progress))
-                .then(result => res.send(result.text))
+                // .then(result => res.send(result.text))
+                .then(result => res.redirect('/download'))
                 .finally(() => worker.terminate())
         });
     });
