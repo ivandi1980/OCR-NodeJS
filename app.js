@@ -30,21 +30,14 @@ app.get('/', (req, res) => {
 
 app.post('/upload', (req, res) => {
     upload(req, res, err => {
-        //console.log(req.file);
         fs.readFile(`./uploads/${req.file.originalname}`, (err, data) => {
-            if(err) return console.log('This is your Error', err);
+            if (err) return console.log('This is your Error', err);
 
             worker
-            .recognize(data, 'eng', {testjs_create_pdf: '1'})
-            .progress(progress => {
-                console.log(progress)
-            })
-            .then(result => {
-                res.send(result.text);
-            })
-            .finally(() => {
-                worker.terminate
-            })
+                .recognize(data, 'eng', { testjs_create_pdf: '1' })
+                .progress(progress => console.log(progress))
+                .then(result => res.send(result.text))
+                .finally(() => worker.terminate())
         });
     });
 });
