@@ -1,4 +1,4 @@
-# RSM - Redux
+# OCR - Optical Character Recognitio using NodeJS
 
 ## About the Apps
 This is a Simple OCR (Optical Character Recognition) Application is used to help us to  scan images in images and be used as text, and this application can also be an additional support / application for scanners.
