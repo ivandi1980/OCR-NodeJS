@@ -7,7 +7,7 @@ This is a Simple OCR (Optical Character Recognition) Application is used to help
 To getting started with this application, now you can clone the repo by using this command and you can play around within it
 
 ```bash
-https://github.com/ivandi1980/OCR-Optical-Character-Recognitio-using-NodeJSn-.git
+https://github.com/ivandi1980/OCR-NodeJS.git
 ```
 
 ## Installation
