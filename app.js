@@ -30,39 +30,26 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-// app.post('/upload', (req, res) => {
-//     upload(req, res, err => {
-//         fs.readFile(`./uploads/${req.file.originalname}`, (err, data) => {
-//             if (err) return console.log('This is your Error', err);
-
-//             worker
-//                 .recognize(data, 'eng', { testjs_create_pdf: '1' })
-//                 .progress(progress => console.log(progress))
-//                 // .then(result => res.send(result.text))
-//                 .then(result => res.redirect('/download'))
-//                 .finally(() => worker.terminate())
-//         });
-//     });
-// });
-
 app.post('/upload', (req, res) => {
     upload(req, res, err => {
-        fs.readFile(`./uploads/${req.file.originalname}`, (err, data) => {
+        fs.readFile(`./uploads/${req.file}`, (err, data) => {
             if(err) return console.log('Error:', err);
-            (async () => {
-                await worker.load();
-                await worker.loadLanguage('eng');
-                await worker.initialize('eng');
-                const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
-                console.log(text);
-                await worker.terminate();
-              })();
+
+            worker.recognize(data, 'eng', {
+                test_create_pdf: '1'
+            }).process(process => console.log(process)).then(result => res.send(result.text)).finally(() => worker.terminate())
+            // (async () => {
+            //     await worker.load();
+            //     await worker.loadLanguage('eng');
+            //     await worker.initialize('eng');
+            //     const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
+            //     console.log(text);
+            //     await worker.terminate();
+            //   })();
 
         });
     });
 });
-
-
 
 const PORT = 5000 || process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on Port : ${PORT}`)); 
